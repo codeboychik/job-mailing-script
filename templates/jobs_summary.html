@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>New job positions</title>
+</head>
+<body>
+    <p>Total: ${data['totalCount']}</p>
+    % for index, job in enumerate(data['jobs']):
+        <h3>${index + 1}.${job['title']}</h3>
+        <h5>${job['company']}, ${job['location']}</h5>
+        <p>${job['snippet']}</p>
+        <b>Salary: ${job['salary']}</b>
+        <a href="${job['link']}">View on Jooble</a>
+    % endfor
+</body>
+</html>
