@@ -2,16 +2,98 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>New job positions</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>New Job Positions</title>
+        <style>
+        /* Reset some default styles */
+        body, p, h1, h3, h5, b, a {
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Use web-safe fonts */
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background-color: #f0f0f0;
+            color: #333333;
+        }
+
+        /* Container */
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* Header */
+        h1 {
+            font-size: 24px;
+            color: #0073e6;
+            margin-bottom: 10px;
+        }
+
+        /* Job Listing */
+        .job {
+            margin-top: 20px;
+            background-color: #ffb447; /* Complementary color to #0073e6 */
+            padding: 15px;
+            border-radius: 15px; /* Rounded borders */
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Box shadow for depth */
+        }
+
+        h3 {
+            font-size: 20px;
+            color: #333333;
+        }
+
+        h5 {
+            font-size: 16px;
+            color: #777777;
+            margin-top: 5px;
+        }
+
+        p {
+            font-size: 16px;
+            line-height: 1.5;
+            color: #555555;
+            margin-top: 10px;
+        }
+
+        .salary-info {
+            font-size: 16px;
+            color: #0073e6;
+            display: block;
+            margin-top: 10px;
+        }
+
+        /* Links */
+        a {
+            text-decoration: none;
+            color: #0073e6;
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 600px) {
+            .container {
+                width: 100% !important;
+                padding: 10px !important;
+            }
+        }
+    </style>
 </head>
 <body>
-    <p>Total: ${data['totalCount']}</p>
-    % for index, job in enumerate(data['jobs']):
-        <h3>${index + 1}.${job['title']}</h3>
-        <h5>${job['company']}, ${job['location']}</h5>
-        <p>${job['snippet']}</p>
-        <b>Salary: ${job['salary']}</b>
-        <a href="${job['link']}">View on Jooble</a>
-    % endfor
+    <div class="container">
+        <h1>New Job Positions</h1>
+        <p>Total positions: ${data['totalCount']}, preferred location: ${data['location']}</p>
+        % for index, job in enumerate(data['jobs']):
+            <div class="job">
+                <h3>${index + 1}.${job['title']}</h3>
+                <h5>${job['company']}, ${job['location']}</h5>
+                <p>${job['snippet']}</p>
+                <b class="salary-info">Salary: ${job['salary'] if len(job['salary']) > 0 else 'Not available'}</b>
+                <div><a href="${job['link']}">View on Jooble</a></div>
+            </div>
+        % endfor
+    </div>
 </body>
 </html>

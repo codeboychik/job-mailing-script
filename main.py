@@ -15,7 +15,7 @@ body = '{ "keywords": "it", "location": "Bern"}'
 connection.request('POST', '/api/' + key, body, headers)
 response = connection.getresponse()
 data = json.loads(response.read().decode('utf-8'))
-
+data['location'] = json.loads(body)['location']
 filled_template = email_template.get_filled_template(
     './templates/jobs_summary.html',
     data=data
